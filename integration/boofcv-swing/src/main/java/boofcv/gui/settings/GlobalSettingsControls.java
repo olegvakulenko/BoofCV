@@ -118,8 +118,11 @@ public class GlobalSettingsControls extends StandardAlgConfigPanel implements Ac
 		if( !canceled ) {
 			if( changedTheme ) {
 				settings.changeTheme();
-				// Update the active window with the new theme
+				// Update the all windows with the new theme
 				LafManager.updateLaf();
+				// This warning is needed since not all changes from the previous LAF are reset and can result
+				// in really messed up looking themes
+				JOptionPane.showMessageDialog(parent,"Restart to ensure the theme renders correctly");
 			}
 		}
 	}
