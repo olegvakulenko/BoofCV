@@ -484,6 +484,19 @@ public abstract class StandardPointTracker<T extends ImageGray<T>> {
 		checkIdentical(input, ret);
 	}
 
+	/**
+	 * Makes sure the number of active tracks makes sense
+	 */
+	@Test
+	void checkTrackCounts() {
+		fail("Implement");
+	}
+
+	@Test
+	void dropTracks() {
+		fail("Implement");
+	}
+
 	private void checkIdentical( List<PointTrack> a , List<PointTrack> b ){
 		assertEquals(a.size(),b.size());
 

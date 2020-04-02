@@ -90,6 +90,16 @@ public class PointTrackerCombined<I extends ImageGray<I>, D extends ImageGray<D>
 	}
 
 	@Override
+	public int getTotalActive() {
+		return tracker.getReactivated().size() + tracker.getPureKlt().size();
+	}
+
+	@Override
+	public int getTotalInactive() {
+		return tracker.getDormant().size();
+	}
+
+	@Override
 	public void process(I image) {
 		frameID++;
 		detected = false;
@@ -162,6 +172,11 @@ public class PointTrackerCombined<I extends ImageGray<I>, D extends ImageGray<D>
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public void dropTracks(Dropper dropper) {
+		throw new RuntimeException("Implement");
 	}
 
 	@Override
