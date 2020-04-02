@@ -176,7 +176,19 @@ public class PointTrackerCombined<I extends ImageGray<I>, D extends ImageGray<D>
 
 	@Override
 	public void dropTracks(Dropper dropper) {
-		throw new RuntimeException("Implement");
+		dropTracks(dropper, tracker.getPureKlt());
+		dropTracks(dropper, tracker.getReactivated());
+		dropTracks(dropper, tracker.getDormant());
+	}
+
+	private void dropTracks(Dropper dropper, List<CombinedTrack<Desc>> tracks) {
+		for (int i = tracks.size()-1; i >= 0; i--) {
+			PointTrack track = tracks.get(i).getCookie();
+			if( dropper.shouldDropTrack(track) ) {
+				tracker.addUnused(tracks.remove(i));
+				previousSpawn--;
+			}
+		}
 	}
 
 	@Override
